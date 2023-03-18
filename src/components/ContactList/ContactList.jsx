@@ -3,7 +3,7 @@ import { ContactListItem } from 'components/ContactListItem/ContactListItem.jsx'
 import { Wrapper } from './ContactList';
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.contacts.list);
+  const contacts = useSelector(state => state.contacts.items);
   const findElements = useSelector(state => state.filter);
 
   const visibleContacts = () => {

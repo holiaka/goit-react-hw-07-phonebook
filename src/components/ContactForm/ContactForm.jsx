@@ -39,7 +39,7 @@ const FormError = ({ name }) => {
 export const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const oldContacts = useSelector(state => state.contacts.list);
+  const oldContacts = useSelector(state => state.contacts.items);
 
   const onSubmit = ({ name, number }) => {
     const findContact = oldContacts.find(item => item.name === name);
