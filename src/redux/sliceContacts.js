@@ -1,5 +1,5 @@
 import { createSlice} from '@reduxjs/toolkit';
-import { fetchContacts } from './operations';
+import { fetchContacts, addContact, deleteContact } from './operations';
 
 const contactsInitialState = {
   items: [],
@@ -16,7 +16,6 @@ export const contactSlice = createSlice({
       state.isLoading = true;
      },
     [fetchContacts.fulfilled](state, action) {
-      console.log(state, action)
       state.items = action.payload;
       state.isLoading = false;
       state.error = null;
@@ -25,29 +24,32 @@ export const contactSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
+    [addContact.pending](state) {
+      state.isLoading = true;
+     },
+    [addContact.fulfilled](state, action) {
+      state.items = [...state.items, action.payload];
+      state.isLoading = false;
+      state.error = null;
+    },
+    [addContact.rejected](state, action) {      
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [deleteContact.pending](state) {
+      state.isLoading = true;
+     },
+    [deleteContact.fulfilled](state, action) {
+      console.log(state.items, action.payload);
+      state.items = [...state.items.filter(item => item.id !== action.payload.id)];
+      state.isLoading = false;
+      state.error = null;
+    },
+    [deleteContact.rejected](state, action) {      
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   }
-
-  // reducers: {
-  //   addContact: {
-  //     reducer(state, action) {
-  //       state.items.push(action.payload);
-  //     },
-  //     prepare(name, number) {
-  //       return {
-  //         payload: {
-  //           id: nanoid(),
-  //           name: name,
-  //           number: number,
-  //         },
-  //       };
-  //     },
-  //   },
-  //   deleteContact(state, action) {
-  //     return { list: state.list.filter(item => item.id !== action.payload) };
-  //   },
-  // },
 });
 
-export const { addContact, deleteContact } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;

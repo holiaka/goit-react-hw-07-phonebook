@@ -14,12 +14,12 @@ export const ContactList = () => {
 
   return (
     <Wrapper>
-      {visibleContacts().map(({ id, name, number }) => (
+      {visibleContacts().map(({ id, name, phone }) => (
         <ContactListItem
           key={id}
           id={id}
           name={name}
-          number={number}
+          number={phone}
         ></ContactListItem>
       ))}
     </Wrapper>

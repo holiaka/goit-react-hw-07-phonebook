@@ -9,11 +9,11 @@ import {
   InputName,
   SubmitBtn,
 } from './ContactForms';
-import { addContact } from 'redux/sliceContacts';
+import { addContact } from 'redux/operations';
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 const validationSchema = Yup.object({
@@ -21,9 +21,9 @@ const validationSchema = Yup.object({
     .min(4, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
-  number: Yup.string()
+  phone: Yup.string()
     .min(10, 'Too Short!')
-    .max(14, 'Too Long!')
+    .max(20, 'Too Long!')
     .required('Required'),
 });
 
@@ -41,13 +41,13 @@ export const ContactForm = () => {
 
   const oldContacts = useSelector(state => state.contacts.items);
 
-  const onSubmit = ({ name, number }) => {
+  const onSubmit = ({ name, phone }) => {
     const findContact = oldContacts.find(item => item.name === name);
 
     if (findContact) {
       alert("You have already added this person's data to Contact list!!!");
     } else {
-      dispatch(addContact(name, number));
+      dispatch(addContact({ name, phone }));
     }
   };
 
@@ -72,11 +72,11 @@ export const ContactForm = () => {
         <InputBox>
           <Input
             type="tel"
-            name="number"
+            name="phone"
             placeholder="Enter phone number"
             required
           ></Input>
-          <FormError name="number" />
+          <FormError name="phone" />
         </InputBox>
         <SubmitBtn type="submit">Add contact</SubmitBtn>
       </SubmitForm>
