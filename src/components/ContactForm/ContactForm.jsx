@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { selectContacts } from 'redux/selector';
 import {
   ErrorText,
   SubmitForm,
@@ -10,6 +11,7 @@ import {
   SubmitBtn,
 } from './ContactForms';
 import { addContact } from 'redux/operations';
+
 
 const initialValues = {
   name: '',
@@ -39,7 +41,7 @@ const FormError = ({ name }) => {
 export const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const oldContacts = useSelector(state => state.contacts.items);
+  const oldContacts = useSelector(selectContacts);
 
   const onSubmit = ({ name, phone }) => {
     const findContact = oldContacts.find(item => item.name === name);

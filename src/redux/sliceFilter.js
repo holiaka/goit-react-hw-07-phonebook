@@ -7,7 +7,7 @@ export const filterSlice = createSlice({
   initialState: filterInitialState,
 
   reducers: {
-    searchKeyword(state, action) {
+    searchKeyword(_, action) {
       return action.payload;
     },
   },
