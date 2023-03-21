@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/operations';
-import { DeleteButton, Item } from './ContactListItem';
+import { ContactText, DeleteButton, Item, TextContainer } from './ContactListItem';
 
 export const ContactListItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   return (
     <Item>
-      <p>
-        {name}: <span>{number}</span>
-      </p>
+      <TextContainer>
+        <ContactText>
+          {name}: {number}
+      </ContactText>
+      </TextContainer>      
       <DeleteButton
         type="button"
         id={id}

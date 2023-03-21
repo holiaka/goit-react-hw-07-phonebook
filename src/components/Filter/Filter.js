@@ -4,7 +4,7 @@ export const FilterBox = styled.div`
     display: flex;
     gap: 10px;
     justify-content: center;
-
+    margin-bottom: 30px;
 `;
 
 export const FilterTitle = styled.p`
